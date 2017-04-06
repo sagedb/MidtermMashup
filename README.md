@@ -1,5 +1,6 @@
 # MidtermMashup
-Get a random word, define it, map out addresses you enter in.
+Get a random word, define it, center the map on your position, map out addresses you enter in.
+
 Project done mainly on the JS side of things.
 (You can ignore most of the methods in the server file, those were just for testing purposes)
 
