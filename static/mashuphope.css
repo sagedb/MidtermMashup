@@ -1,0 +1,23 @@
+#map {
+  height: 50%;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: gray;
+  padding-left: 0.5cm;
+  padding-right: 0.5cm;
+  padding-top: 0.2cm;
+  padding-bottom: 0.8cm;
+}
+header{
+  width: 100%;
+}
+h1{
+  text-align: center;
+}
+
+p {
+    font-size: 18px;
+}

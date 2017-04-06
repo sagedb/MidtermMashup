@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 70%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <input type="text" name="friend's city" id="friendcity"><br>
+    <button onclick="initMap.GeoCode()">Add Friend's City</button>
+    <script>
+
+    var map;
+    function initMap() {
+      var myLatLng = {lat: 44.977, lng: -93.265};
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 43.3, lng: -91.7},
+        zoom: 6
+      });
+      var infoWindow = new google.maps.InfoWindow({map: map});
+
+      // Try HTML5 geolocation.
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+
+          infoWindow.setPosition(pos);
+          infoWindow.setContent('Location found.');
+          map.setCenter(pos);
+        }, function() {
+          handleLocationError(true, infoWindow, map.getCenter());
+        });
+      } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+      }
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+      }
+
+      var city = "Chicago";
+      let therequestStr = "https://maps.googleapis.com/maps/api/geocode/json?address=" + city + "&key=AIzaSyD9uFBbA6BKRjP6Mnc8DF5j5S0uEmmKkoI";
+      $.ajax({
+          url: therequestStr,
+          success: function(data){
+              var mylat = data.results[0].geometry.location['lat'];
+              var mylng = data.results[0].geometry.location['lng'];
+              var newpos = {lat:mylat, lng:mylng};
+              console.log(newpos);
+
+              var marker= new google.maps.Marker({
+                position: newpos,
+                map: map
+              });
+          }
+      });
+
+      function GeoCode() {
+
+        var city = document.getElementById("friendcity").value;
+        let therequestStr = "https://maps.googleapis.com/maps/api/geocode/json?address=" + city + "&key=AIzaSyD9uFBbA6BKRjP6Mnc8DF5j5S0uEmmKkoI";
+        $.ajax({
+            url: therequestStr,
+            success: function(data){
+                var mylat = data.results[0].geometry.location['lat'];
+                var mylng = data.results[0].geometry.location['lng'];
+                var newpos = {lat:mylat, lng:mylng};
+                console.log(newpos);
+
+                var marker= new google.maps.Marker({
+                  position: newpos,
+                  map: map
+                });
+            }
+        });
+      }
+      initMap.GeoCode = GeoCode;
+
+}
+
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9uFBbA6BKRjP6Mnc8DF5j5S0uEmmKkoI&callback=initMap"
+    async defer></script>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> mash test</title>
+    <!-- Cross origin requests are only supported for protocol schemes:
+    http, data, chrome, chrome-extension, https, chrome-extension-resource.
+    Says that XMLHttpRequest
+    -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="mashuphope.js"></script>
+    <link rel="stylesheet" href="mashuphope.css">
+
+  </head>
+  <body>
+    <header>
+      <h1>Learn a Fancy New Word</h1>
+    </header>
+    <p>* Click the button below to start the search for a new random word.</p>
+    <p>* The random word will be chosen based on whether the Pearson dictionary can define it</p>
+    <button onclick="RandomWord()">New Random Word</button>
+    <p id="element"></p>
+
+    <p id="definitions"></p>
+
+
+    <div id="map"></div>
+
+    <p id="gotword1"></p>
+    <p id="gotword2"></p>
+
+    <input type="text" name="friend's city" id="friendcity"><br>
+    <button onclick="initMap.GeoCode()">Add Friend's Location</button>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9uFBbA6BKRjP6Mnc8DF5j5S0uEmmKkoI&callback=initMap">
+    </script>
+
+  </body>
+</html>
