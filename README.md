@@ -7,4 +7,4 @@ APIs used:
 - setgetgo : random word generator
 - pearson dictionary : defines words
 - google maps : take a guess
-- google geocode : takes an address (or parts of it) and returns a {latlong}
+- google geocode : takes an address (or parts of it) and returns info about it, especially the {latlong}
