@@ -88,6 +88,7 @@ function initMap() {
   }
 
 
+
   function GeoCode() {
 
     var city = document.getElementById("friendcity").value;
@@ -104,6 +105,12 @@ function initMap() {
               position: newpos,
               map: map
             });
+            var infowindow = new google.maps.InfoWindow({
+              content: '<p>The word to show off here is:</p><br>' + document.getElementById("element").innerHTML
+            });
+            marker.addListener('click', function() {
+            infowindow.open(map, marker);
+            });
         }
     });
   }
@@ -111,9 +118,12 @@ function initMap() {
 
 }
 
+
+
   function gotWord(){
     let response1 = "Great! Now that you have the word, why not show your friends? They'll call it bragging, but we can call it <i>enlightening</i>!";
-    let response2 = "Just throw in the as much of the address of where your friends (or enemies) live and you'll be set with a map showing you all the places you can go to brag - I mean, enlighten - with your new word! Amazing!"
+    let response2 = "Just throw in the as much of the address of where your friends (or enemies) live and you'll be set with a map showing you all the places you can go to brag - I mean, enlighten - with your new word! Amazing!\
+    <br> Also, you can click on the markers to see which word you want to brag in that location. <br>Want to brag a different random word elsewhere? Click the random word generator button again and enter in a new address!"
     document.getElementById("gotword1").innerHTML = response1;
     document.getElementById("gotword2").innerHTML = response2;
   }
